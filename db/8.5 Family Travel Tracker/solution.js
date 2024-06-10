@@ -9,7 +9,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world",
-  password: "123456",
+  password: "new_password",
   port: 5432,
 });
 db.connect();
@@ -17,7 +17,7 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let currentUserId = 1;
+let currentUserId = 3;
 
 let users = [
   { id: 1, name: "Angela", color: "teal" },
@@ -45,6 +45,7 @@ async function getCurrentUser() {
 app.get("/", async (req, res) => {
   const countries = await checkVisisted();
   const currentUser = await getCurrentUser();
+  console.log(currentUser.color)
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,

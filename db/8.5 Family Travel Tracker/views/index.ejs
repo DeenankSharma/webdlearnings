@@ -389,9 +389,14 @@
   </h2>
   <script>
     const country_codes = "<%= countries %>".split(",")
-    console.log(typeof ("<%= countries %>"))
-    country_codes.forEach(code => {
-      document.getElementById(code).style.fill = "<%= color %>"
+    country_codes.forEach((code) => {
+      const element = document.getElementById(String(code));
+      if (element) {
+        element.style.fill = "<%= color %>"
+      } 
+      else {
+        console.error("Element with ID", code, "not found");
+      }
     });
   </script>
 </body>
